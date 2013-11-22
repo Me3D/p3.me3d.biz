@@ -2,16 +2,17 @@ var resp; //response from random.org
 var salt; //salt used for key generation and encryption
 var key128Bits; //final key
 
-function key_hash() {
-	$( "#target" ).keyup(function() {
-		$('#md5').html( CryptoJS.MD5( $('#target').val()).toString() );
-		$('#ripemd').html( CryptoJS.RIPEMD160( $('#target').val()).toString() );
-		$('#sha1').html( CryptoJS.SHA1( $('#target').val()).toString() );
-		$('#sha256').html( CryptoJS.SHA256( $('#target').val()).toString() );
-		$('#sha512').html( CryptoJS.SHA512( $('#target').val()).toString() );
-		$('#sha3').html( CryptoJS.SHA3( $('#target').val()).toString() );
-	});
-}
+
+
+$( "#target" ).keyup(function() {
+	$('#md5').html( CryptoJS.MD5( $('#target').val()).toString() );
+	$('#ripemd').html( CryptoJS.RIPEMD160( $('#target').val()).toString() );
+	$('#sha1').html( CryptoJS.SHA1( $('#target').val()).toString() );
+	$('#sha256').html( CryptoJS.SHA256( $('#target').val()).toString() );
+	$('#sha512').html( CryptoJS.SHA512( $('#target').val()).toString() );
+	$('#sha3').html( CryptoJS.SHA3( $('#target').val()).toString() );
+});
+
 
 function calculating(keysize){
 	
@@ -80,3 +81,70 @@ function crypto_go() {
 	var decrypted = CryptoJS.AES.decrypt(encrypted, keybits.toString());
 	console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8)); 
 }//end final
+
+function move(next_page){
+    switch (next_page) {
+	    case intro:
+
+	    $("#intro, #hashes, #random, #key, #encrypt, #decrypt").fadeOut("slow", function (){
+	    console.log("ran");
+	    });
+	   
+	    $("#intro").delay(800).fadeIn("slow", function (){
+	    console.log("ran");
+	    });
+	    break;
+	case hashes:
+
+	    $("#intro, #hashes, #random, #key, #encrypt, #decrypt").fadeOut("slow", function (){
+	    console.log("ran");
+	    });
+	   
+	    $("#hashes").delay(800).fadeIn("slow", function (){
+	    console.log("ran");
+	    });
+	    break;
+	case random:
+	    $("#intro, #hashes, #random, #key, #encrypt, #decrypt").fadeOut("slow", function (){
+	    console.log("ran");
+	    });
+	   
+	    $("#random").delay(800).fadeIn("slow", function (){
+		console.log("ran");
+	    });
+	    break;
+	
+	case key:
+	    $("#intro, #hashes, #random, #key, #encrypt, #decrypt").fadeOut("slow", function (){
+		console.log("ran");
+	    });
+	   
+	    $("#key").delay(800).fadeIn("slow", function (){
+		console.log("ran");
+	    });
+	    break;
+	
+	case encrypt:
+	    $("#intro, #hashes, #random, #key, #encrypt, #decrypt").fadeOut("slow", function (){
+		console.log("ran");
+	    });
+	   
+	    $("#encrypt").delay(800).fadeIn("slow", function (){
+		console.log("ran");
+	    });
+	    break;
+	
+	case decrypt:
+	    $("#intro, #hashes, #random, #key, #encrypt, #decrypt").fadeOut("slow", function (){
+		console.log("ran");
+	    });
+	   
+	    $("#decrypt").delay(800).fadeIn("slow", function (){
+		console.log("ran");
+	    });
+	    break;
+	
+   }
+   
+
+}

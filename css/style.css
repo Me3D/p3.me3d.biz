@@ -1,0 +1,44 @@
+body {
+    background: grey;
+    
+}
+
+
+.black_plate {
+    background: Black;
+    margin:10px;
+    padding: 12px;
+    
+    
+}
+
+.para {
+    font-size:30px;
+    color: #F8F8F8;
+    font: Helvetica, Arial, sans-serif
+}
+
+.title {
+    font-size:50px;
+    color: #F8F8F8;
+    font: Helvetica, Arial, sans-serif
+}
+
+#table_text {
+    color: green;
+    
+}
+
+#hash_table {
+    
+    
+}
+
+.hash_name {
+    
+}
+
+.hash_guts {
+    word-break:break-all;
+    
+}

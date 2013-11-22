@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Crypto Bandito</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="img/favicon.png">
+  
+
+
+    
+
+</head>
+
+<body>
+
+    <div class="container">
+
+<!-- INTRO PAGE -->
+        <div id="intro"  >
+            <div class="black_plate">
+              <p class="para" >
+                hi.</p>
+                <p class="title">intro to crypto.</p>
+                <p class="para" >
+                    Welcome to my page on cryptography. We'll be studying the basics of crypto, and end with a usable tool for realworld secured communications.           
+              </p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8"></div>
+                <div class="col-md-2" align="right">
+                    <button type="button" class="btn btn-default btn-lg" onclick="move(hashes);" >
+                        Begin <span class="glyphicon glyphicon-arrow-right"></span> 
+                    </button>
+                </div>      
+            </div>
+        </div>
+    
+    
+<!-- HASHES PAGE -->    
+    <div id="hashes"  style="display: none;">
+        <div class ="black_plate">
+          <p class="para" >
+                Hashes.</p>  
+             <input id="target" type="text" value="">
+            
+            <div id="table_text">
+                <table id="hash_table" class="table-condensed" border="1" >
+                <tr>
+                    <td class="hash_name"><h3>MD5</h3></td>
+                    <td class="hash_guts"><div id="md5" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name"><h3>RIPEMD160</h3></td>
+                    <td class="hash_guts"><div id="ripemd" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name"><h3>SHA1</h3></td>
+                    <td class="hash_guts"><div id="sha1" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name"><h3>SHA256</h3></td>
+                    <td class="hash_guts"><div id="sha256" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name"><h3>SHA512</h3></td>
+                    <td class="hash_guts"><div id="sha512" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name"><h3>SHA3</h3></td>
+                    <td class="hash_guts"><div id="sha3" class="small"></div></td>
+                </tr>
+                </table>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default btn-lg" onclick="move(intro);" >
+                     <span class="glyphicon glyphicon-arrow-left"></span> Back
+                </button>           
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2" align="right">
+                <button type="button" class="btn btn-default btn-lg" onclick="move(random);" >
+                    Next <span class="glyphicon glyphicon-arrow-right"></span> 
+                </button>        
+            </div>                                
+        </div>
+
+    </div>
+    
+    
+    
+ <!-- RANDOM PAGE -->    
+        <div id="random" style="display: none;">
+                <div class ="black_plate">
+          hi. intro to random.  
+            sadgasdg
+            asdfg
+            asd
+            gas
+            dg
+            asdfg
+            as
+            dfgh
+            adfh
+            ad
+            fh
+            adfh<br><br><br><br><br><br><br>
+
+<br>
+            
+
+        </div>
+        <div class="row">
+            <div class="col-md-2"><input type="button" value="Back" onclick="move(hashes);"></input></div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><input type="button" value="Onto Keys" onclick="move(key);"></input></input></div>                                
+        </div>
+        
+        
+    </div>
+        
+        
+<!-- KEY PAGE --> 
+    <div id="key"  style="display: none;">
+                <div class ="black_plate">
+          hi. intro to key.  
+            sadgasdg
+            asdfg
+            asd
+            gas
+            dg
+            asdfg
+            as
+            dfgh
+            adfh
+            ad
+            fh
+            adfh<br><br><br><br><br><br><br>
+            a
+            dfh
+            
+        </div>
+        <div class="row">
+            <div class="col-md-2"><input type="button" value="Back" onclick="move(random);"></input></div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><input type="button" value="Onto Encrypt" onclick="move(encrypt);"></input></div>                                
+        </div>
+        
+        
+    </div>
+    
+<!-- ENCRYPT PAGE -->     
+    <div id="encrypt"  style="display: none;">
+                <div class ="black_plate">
+          hi. intro to encrypt.  
+            sadgasdg
+            asdfg
+            asd
+            gas
+            dg
+            asdfg
+            as
+            dfgh
+            adfh
+            ad
+            fh
+            adfh<br><br><br><br><br><br><br>
+            a
+            dfh
+            
+        </div>
+        <div class="row">
+            <div class="col-md-2"><input type="button" value="Back" onclick="move(key);"></input></div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2"><input type="button" value="Onto Decrypt" onclick="move(decrypt);"></input></div>                                
+        </div>
+        
+        
+    </div>
+
+<!-- DECRYPT PAGE -->     
+        <div id="decrypt" style="display: none;">
+                <div class ="black_plate">
+          hi. intro to decrypt.  
+            sadgasdg
+            asdfg
+            asd
+            gas
+            dg
+            asdfg
+            as
+            dfgh
+            adfh
+            ad
+            fh
+            adfh<br><br><br><br><br><br><br>
+            a
+            dfh
+            
+        </div>
+        <div class="row">
+            <div class="col-md-2"><input type="button" value="Back" onclick="move(encrypt);"></input></div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2"></div>                                
+        </div>
+        
+    </div>
+
+
+    </div>
+   
+
+
+</body>
+</html>
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/core-min.js"></script>
+<script src="js/pbkdf2.js"></script>
+<script src="js/tripledes.js"></script>
+<script src="js/aes.js"></script>
+<script src="js/md5.js"></script>
+<script src="js/sha3.js"></script>
+<script src="js/sha256.js"></script>
+<script src="js/sha512.js"></script>
+<script src="js/ripemd160.js"></script>
+<script src="js/lib.js"></script>
+<script src="js/bootstrap.min.js"></script>
