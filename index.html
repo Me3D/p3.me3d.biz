@@ -1,0 +1,77 @@
+
+<body>
+  <html>
+    
+    <div id="go" class="">
+      
+      <p></p>
+      
+    </div>
+    <input type="button" value="Calculate 128 bit key" onclick="keygen(128);" ></input>
+    <input type="button" value="Calculate 256 bit key" onclick="keygen(256);" ></input>
+    <input type="button" value="Calculate 512 bit key" onclick="keygen(512);" ></input>
+    <form>
+  <input id="target" type="text" value="">
+</form>
+  
+  
+
+<table border="1">
+<tr>
+<td>MD5</td>
+<td><div id="md5"></div></td>
+</tr>
+<tr>
+<td>RIPEMD160</td>
+<td><div id="ripemd"></div></td>
+</tr>
+<tr>
+<td>SHA1</td>
+<td><div id="sha1"></div></td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td><div id="sha256"></div></td>
+</tr>
+<tr>
+<td>SHA512</td>
+<td><div id="sha512"></div></td>
+</tr>
+<tr>
+<td>SHA3</td>
+<td><div id="sha3"></div></td>
+</tr>
+</table>
+  
+  
+
+  </html>
+  
+  
+</body>
+
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/core-min.js"></script>
+<script src="js/pbkdf2.js"></script>
+<script src="js/tripledes.js"></script>
+<script src="js/aes.js"></script>
+<script src="js/md5.js"></script>
+<script src="js/sha3.js"></script>
+<script src="js/sha256.js"></script>
+<script src="js/sha512.js"></script>
+<script src="js/ripemd160.js"></script>
+<script src="js/lib.js"></script>
+
+
+<link rel="stylesheet" href="js/bootstrap.min.css">
+
+<link rel="stylesheet" href="js/bootstrap-theme.min.css">
+
+
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function(){  
+  key_hash();
+});
+</script>
