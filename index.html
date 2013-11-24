@@ -1,56 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Crypto Bandito</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="img/favicon.png"> 
+</head>
 
 <body>
-  <html>
     
-    <div id="go" class="">
-      
-      <p></p>
-      
+    <div class="container">
+        
+<!-- INTRO PAGE -->
+        <div id="intro" style="display: none;">
+            <div class="black_plate">
+                <p class="title">intro to crypto.</p>
+
+                <p class="para" >
+                  hi. welcome to my page on cryptography.
+                 <p class="para" > 
+                  We'll be studying the basics of crypto, and end with a usable tool for real-world, secured communications. Please press Begin to start the journey.          
+              </p>
+                 <p class="small-para" > 
+                  Don't use your browser's back button. Use the navigation buttons below. I've got it all under control. Trust me :)          
+              </p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8"></div>
+                <div class="col-md-2" align="right">
+                    <button type="button" class="btn btn-default btn-lg" onclick="move(hashes);" >
+                        Begin <span class="glyphicon glyphicon-arrow-right"></span> 
+                    </button>
+                </div>      
+            </div>
+        </div>
+    
+    
+<!-- HASHES PAGE -->    
+    <div id="hashes"  style="display: none;">
+        <div class ="black_plate">
+          <p class="title">hashes.</p>
+          <p class="para" >
+                Hashes are one way functions. They take a message and turn it into gibberish. It's almost impossible to reverse a hash back to the original message. Hashes are used to create special strings for encryption, and to verify the message was unaltered during transmission. Some hashes are stronger than others. Type some text in the box below to see hashes computed in realtime. Hover over the hash names for more detail.</p>  
+             <form  class="form-inline" role="form">
+                <div class="form-group">
+                    <input class="form-control" id="target" type="text" value="" placeholder="Enter text here" title="Just enter any random garbage.">
+                </div>               
+             </form>
+            
+            <div id="table_text">
+                <table id="hash_table" class="table-condensed" border="1" >
+                <tr>
+                    <td class="hash_name" title="MD5 hash is WEAK! If it were an animal protecting your house, it would be a common mouse."><h3>MD5</h3></td>
+                    <td class="hash_guts"><div id="md5" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name" title="RIPEMD hash is whimpy! If it were an animal protecting your house. It would be a little, yappy dog."><h3>RIPEMD160</h3></td>
+                    <td class="hash_guts"><div id="ripemd" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name" title="SHA1 hash is a weakling! If it were an animal protecting your house. It would be a fat, unhealthy cat."><h3>SHA1</h3></td>
+                    <td class="hash_guts"><div id="sha1" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name" title="SHA256 hash is fairly tough! If it were an animal protecting your house. It would be a pitbull."><h3>SHA256</h3></td>
+                    <td class="hash_guts"><div id="sha256" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name" title="SHA512 hash is strong! If it were an animal protecting your house. It would be a very hungry lion."><h3>SHA512</h3></td>
+                    <td class="hash_guts"><div id="sha512" class="small"></div></td>
+                </tr>
+                <tr>
+                    <td class="hash_name" title="SHA3 hash is INSANE! If it were an animal protecting your house. It would be a velociraptor on crack."><h3>SHA3</h3></td>
+                    <td class="hash_guts"><div id="sha3" class="small"></div></td>
+                </tr>
+                </table>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default btn-lg" onclick="move(intro);" >
+                     <span class="glyphicon glyphicon-arrow-left"></span> Back
+                </button>           
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2" align="right">
+                <button type="button" class="btn btn-default btn-lg" onclick="move(random);" >
+                    Next <span class="glyphicon glyphicon-arrow-right"></span> 
+                </button>        
+            </div>                                
+        </div>
+
     </div>
-    <input type="button" value="Calculate 128 bit key" onclick="keygen(128);" ></input>
-    <input type="button" value="Calculate 256 bit key" onclick="keygen(256);" ></input>
-    <input type="button" value="Calculate 512 bit key" onclick="keygen(512);" ></input>
-    <form>
-  <input id="target" type="text" value="">
-</form>
-  
-  
+    
+    
+    
+ <!-- RANDOM PAGE -->    
+        <div id="random" style="display: none;">
+                <div class ="black_plate">
+        <p class="title">randomness.</p>
+          <p class="para" >
+                Randomness is vital to the creation of secret (and very important!) keys for encryption and decryption. Crypto is extremely reliant upon the use of numbers with near perfect randomness. If one's random number source is not random, the resulting keys will enable the enemy to mathematically guess the secret keys! In this web application, we will use atmospheric noise to create a random "salt". A salt, is a string of charachters mixed into the blender, along with one's secret message and secret key to make life miserable for cryptanalysts.
+          </p>
+            <p class="para" >    
+                The button below is connected to a website which sucks down atmospheric noise. A near perfect source for random numbers for our salt. Press it multiple times for new numbers!
+          </p>  
+            <button type="button" class="btn btn-default btn-lg" onclick="keygen(0);" >
+                     <span class="glyphicon glyphicon-cloud"></span> Get Some Random Noise From The Sky <span class="glyphicon glyphicon-cloud"></span>
+                </button> 
+            <div id="random-noise" class="noise"></div>
 
-<table border="1">
-<tr>
-<td>MD5</td>
-<td><div id="md5"></div></td>
-</tr>
-<tr>
-<td>RIPEMD160</td>
-<td><div id="ripemd"></div></td>
-</tr>
-<tr>
-<td>SHA1</td>
-<td><div id="sha1"></div></td>
-</tr>
-<tr>
-<td>SHA256</td>
-<td><div id="sha256"></div></td>
-</tr>
-<tr>
-<td>SHA512</td>
-<td><div id="sha512"></div></td>
-</tr>
-<tr>
-<td>SHA3</td>
-<td><div id="sha3"></div></td>
-</tr>
-</table>
-  
-  
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-lg" onclick="move(hashes);" >
+                     <span class="glyphicon glyphicon-arrow-left"></span> Back
+                </button>     
+        </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2" align="right">
+                <button type="button" class="btn btn-default btn-lg" onclick="move(key);" >
+                     Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button> 
+            </div>                                
+        </div>
+        
+        
+    </div>
+        
+        
+<!-- KEY PAGE --> 
+    <div id="key"  style="display: none;">
+        <div class ="black_plate">
+            <p class="title">keys.</p>
+              <p class="para" >
+                  Keys are random strings of charachters stuffed into an encryption algorithm along with your super secret message and salt. The key, the salt and your message are churned together via mathematical black magic and computational LSD trips. The resultant ciphertext should be indistinguishable from noise. Of all things crypto, the key is the numero uno most important item to protect. NEVER, EVER, EVER, NEVER, EVER give out details of your keys.   
+                </p>  
+              <p class="para" >
+                 In modern cryptosystems, key lengths in symmetric encryption are typically between 64bits to 512bits. The longer the key, the stronger the key is to attack. Longer keys also take longer to calculate. The three buttons below combine two things: a password and random noise(salt). These two items are pushed through a key expansion algorithm called PBKDF2. This creates a long, super strong key from relatively small sources of data. Be patient, the PBKDF2 runs 1000 times per key created! Open your browser's Javascript console for extra detail.
+                </p>   
+              
+              <div class="row">
+                  <div class="col-md-3">
+                    <form  class="form-inline" role="form">
+                        <div class="form-group">
+                            <input class="form-control" id="password" type="text" placeholder="Enter password here" title="Make sure your password is long!">
+                        </div>               
+                    </form>                  
+                  </div>
 
-  </html>
-  
-  
+                  <div class="col-md-3"><button type="button" class="btn btn-default btn-lg" onclick="keygen(128);" >
+                     <span class="glyphicon glyphicon-random"></span> Calculate 128 bit key
+                </button></input></div>
+                  <div class="col-md-3"><button type="button" class="btn btn-default btn-lg" onclick="keygen(256);" >
+                     <span class="glyphicon glyphicon-random"></span> Calculate 256 bit key
+                </button></input></div>
+                  <div class="col-md-3"><button type="button" class="btn btn-default btn-lg" onclick="keygen(512);" >
+                     <span class="glyphicon glyphicon-random"></span> Calculate 512 bit key
+                </button></input></div>
+              </div>
+    
+              <div id="keygo" class="key"></div>    
+        </div>
+                
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default btn-lg" onclick="move(random);" >
+                     <span class="glyphicon glyphicon-arrow-left"></span> Back
+                </button>     
+        </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2" align="right">
+                <button type="button" class="btn btn-default btn-lg" onclick="move(encrypt);" >
+                     Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button> 
+            </div>                                
+        </div>
+        
+        
+    </div>
+    
+<!-- ENCRYPT PAGE -->     
+    <div id="encrypt"  style="display: none;">
+                <div class ="black_plate">
+         <p class="title">encryption.</p>
+          <p class="para" >
+                Ok, we are now at the fun part! Encryption is the process of turning one's secret message, and secret key
+                into a blob of unusable, unreable binary goo. Only the owners of the secret key can unlock the secret message.
+                There are a number of encryption alogirthms out there; some better than others. Below we will play with
+                a couple of the modern ones. All of these are considered fairly safe from prying eyes. In fact, AES with a 512
+                bit key is allowed to encrypt upto the SECRET level in miltary communications. That's pretty darn good.
+          </p>
+            <p class="med-para">Step 1. Type a password. And then forget it, we'll not need it again.</p>
+            <p class="med-para">Step 2. Choose a hash. They are in order from weakest(MD5) to strongest (SHA3)</p>
+            <p class="med-para">Step 3. Calculate a key. Bigger is better.</p>
+            <p class="med-para">Step 4. Type in your secret message. I promise not to look.</p>
+            <p class="med-para">Step 5. Choose an algorithm. AES is best.</p>
+            <div class="row" id="password-hash" >
+               
+                <div class="col-md-3">
+                    <form  class="form-inline" role="form">
+                        <div class="form-group">
+                            <input class="form-control" id="password-encrypt" type="text" placeholder="Enter password" title="Make sure your password is long!">
+                         </div>   
+                    </form>
+                 </div>
+            
+                
+                <div class="row">
+                    <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="md5" checked>
+                    <p class="para">MD5</p>
+                    </label>
+                    
+                    <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="ripemd">
+                    <p class="para">RIPEMD</p>
+                    </label>
+                    
+                    <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="sha1">
+                    <p class="para">SHA1</p>
+                    </label>
+                    
+                    <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios4" value="sha256">
+                    <p class="para">SHA256</p>
+                    </label>
+                    
+                    <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios5" value="sha512">
+                    <p class="para">SHA512</p>
+                    </label>
+                    
+                    <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios6" value="sha3">
+                    <p class="para">SHA3</p>
+                    </label>
+
+                  
+                </div> <!--check box row -->
+                
+            </div> <!--end password and button row -->
+            
+            <!--hash output row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="password-hash-out" class=""></div></div>
+            </div>
+            
+            <!--Randomness row-->
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="para" >
+                        We'll get some random noise for you automagically :)
+                    </p>
+                
+          
+                </div>
+            </div>
+            
+            <!--make keys row-->
+            <div class="row">
+                    <div class="col-md-12">
+                    
+                        <button type="button" class="btn btn-default " onclick="keygen(128);" >
+                         <span class="glyphicon glyphicon-random"></span> Calculate 128 bit key
+                    </button>    
+                    
+                    
+                        <button type="button" class="btn btn-default " onclick="keygen(256);" >
+                         <span class="glyphicon glyphicon-random"></span> Calculate 256 bit key
+                    </button>    
+                    
+                    
+                        <button type="button" class="btn btn-default " onclick="keygen(512);" >
+                         <span class="glyphicon glyphicon-random"></span> Calculate 512 bit key
+                    </button>
+                        
+                        <div id="key-encrypt" class="key"></div>
+                    </div>
+            </div>
+            
+            <!--message encrypt row-->
+            <div class="row">
+                 <div class="col-md-12">
+                    <form class="form" role="form">
+                        <div class="form-group">
+                            <input class="form-control" id="secret-message" type="text" placeholder="Enter your secret message" title="">
+                        </div>               
+                    </form>
+                </div>
+            </div>
+            
+            <!--cipher text row-->
+            <div class="row">
+                <div class="col-md-12">
+                                      
+                    
+                        <button type="button" class="btn btn-default " onclick="encrypt('aes');" >
+                            <span class="glyphicon glyphicon-random"></span> Encrypt with AES
+                        </button>    
+                    
+                    
+                        <button type="button" class="btn btn-default " onclick="encrypt('3des');" >
+                            <span class="glyphicon glyphicon-random"></span> Encrypt with 3DES
+                        </button>    
+                    
+                    
+                        <button type="button" class="btn btn-default " onclick="encrypt('rabbit');" >
+                            <span class="glyphicon glyphicon-random"></span> Encrypt with RABBIT
+                        </button>
+                        
+                        <button type="button" class="btn btn-default " onclick="encrypt('rc4');" >
+                            <span class="glyphicon glyphicon-random"></span> Encrypt with RC4
+                        </button>
+                        
+                        
+                    
+                    
+                  <div id="encrypt-output" class=""></div>  
+                </div>                
+            </div>
+            
+        </div> <!--black_plate-->
+        
+        
+        <div class="row">
+            <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-lg" onclick="move(key);" >
+                     <span class="glyphicon glyphicon-arrow-left"></span> Back
+                </button>     
+        </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2" align="right">
+                <button type="button" class="btn btn-default btn-lg" onclick="move(decrypt);" >
+                     Next <span class="glyphicon glyphicon-arrow-right"></span>
+                </button> 
+            </div>                                
+        </div>
+        
+        
+    </div> <!-- encrypt-->
+
+<!-- DECRYPT PAGE -->     
+    <div id="decrypt" style="display: none;">
+            <div class ="black_plate">
+                <p class="title">decryption.</p>
+                <p class="para" >
+                Last stop of the tour. Now we will decrypt the prior screen' message. I've already copied the key and the ciphertext for you.
+                Below are the algorithms for decryption. Try each of them until you get a good plaintext.</p>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="key-decrypt" class=""></div>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="ciphertext-decrypt" class=""></div>
+                    </div>
+                </div>
+            
+                <div class="row" id="decrypt-row" >
+                    <div class="col-md-12">
+                         <button type="button" class="btn btn-default " id="de_aes" onclick="decrypt('aes');" >
+                            <span class="glyphicon glyphicon-random"></span> Decrypt with AES
+                        </button>    
+                    
+                    
+                        <button type="button" class="btn btn-default " id="de_3des" onclick="decrypt('3des');" >
+                            <span class="glyphicon glyphicon-random"></span> Decrypt with 3DES
+                        </button>    
+                    
+                    
+                        <button type="button" class="btn btn-default " id="de_rabbit" onclick="decrypt('rabbit');" >
+                            <span class="glyphicon glyphicon-random"></span> Decrypt with RABBIT
+                        </button>
+                        
+                        <button type="button" class="btn btn-default " id="de_rc4" onclick="decrypt('rc4');" >
+                            <span class="glyphicon glyphicon-random"></span> Decrypt with RC4
+                        </button>
+                        <div id="decrypt-output" class=""></div>
+                    </div>
+                </div>
+            </div>
+            
+
+            
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default btn-lg" onclick="move(encrypt);" >
+                     <span class="glyphicon glyphicon-arrow-left"></span> Back
+                </button>    
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2"></div>                                
+        </div>       
+    </div>
+
+
+    </div>
+   
+
+
 </body>
-
+</html>
 <script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui.js"></script>
 <script src="js/core-min.js"></script>
 <script src="js/pbkdf2.js"></script>
 <script src="js/tripledes.js"></script>
@@ -60,18 +427,7 @@
 <script src="js/sha256.js"></script>
 <script src="js/sha512.js"></script>
 <script src="js/ripemd160.js"></script>
+<script src="js/rabbit.js"></script>
+<script src="js/rc4.js"></script>
 <script src="js/lib.js"></script>
-
-
-<link rel="stylesheet" href="js/bootstrap.min.css">
-
-<link rel="stylesheet" href="js/bootstrap-theme.min.css">
-
-
 <script src="js/bootstrap.min.js"></script>
-
-<script>
-$(document).ready(function(){  
-  key_hash();
-});
-</script>
