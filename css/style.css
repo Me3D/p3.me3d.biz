@@ -16,6 +16,12 @@ body {
     font: Helvetica, Arial, sans-serif
 }
 
+.med-para {
+    font-size:25px;
+    color: #F8F8F8;
+    font: Helvetica, Arial, sans-serif
+}
+
 .small-para {
     font-size:10px;
     color: #F8F8F8;
@@ -74,6 +80,11 @@ body {
 }
 
 .key{
+    margin-top:10px;
+    word-break:break-all;
+}
+
+#decrypt-output{
     margin-top:10px;
     word-break:break-all;
 }

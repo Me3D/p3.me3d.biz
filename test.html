@@ -198,20 +198,20 @@
                 into a blob of unusable, unreable binary goo. Only the owners of the secret key can unlock the secret message.
                 There are a number of encryption alogirthms out there; some better than others. Below we will play with
                 a couple of the modern ones. All of these are considered fairly safe from prying eyes. In fact, AES with a 512
-                bit key is allowed to encrypt upto the SECRET level in miltary communications. That's pretty darn good.    
-          </p>  
- 
+                bit key is allowed to encrypt upto the SECRET level in miltary communications. That's pretty darn good.
+          </p>
+            <p class="med-para">Step 1. Type a password. And then forget it, we'll not need it again.</p>
+            <p class="med-para">Step 2. Choose a hash. They are in order from weakest(MD5) to strongest (SHA3)</p>
+            <p class="med-para">Step 3. Calculate a key. Bigger is better.</p>
+            <p class="med-para">Step 4. Type in your secret message. I promise not to look.</p>
+            <p class="med-para">Step 5. Choose an algorithm. AES is best.</p>
             <div class="row" id="password-hash" >
+               
                 <div class="col-md-3">
                     <form  class="form-inline" role="form">
                         <div class="form-group">
                             <input class="form-control" id="password-encrypt" type="text" placeholder="Enter password" title="Make sure your password is long!">
                          </div>   
-
-                          
-                        
-                       
-
                     </form>
                  </div>
             
@@ -353,24 +353,60 @@
     </div> <!-- encrypt-->
 
 <!-- DECRYPT PAGE -->     
-        <div id="decrypt" style="display: none;">
-                <div class ="black_plate">
-      <p class="title">decryption.</p>
-          <p class="para" >
-                Hashes are one way functions. They take a message and turn it into gibberish. It's almost impossible to reverse a hash back to the original message. Hashes are used to create special strings for encryption, and to verify the message was unaltered during transmission. Some hashes are stronger than others. Type some text in the box below to see hashes computed in realtime. Hover over the hash names for more detail.</p>  
-             
+    <div id="decrypt" style="display: none;">
+            <div class ="black_plate">
+                <p class="title">decryption.</p>
+                <p class="para" >
+                Last stop of the tour. Now we will decrypt the prior screen' message. I've already copied the key and the ciphertext for you.
+                Below are the algorithms for decryption. Try each of them until you get a good plaintext.</p>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="key-decrypt" class=""></div>
+                    </div>
+                </div>
             
-        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="ciphertext-decrypt" class=""></div>
+                    </div>
+                </div>
+            
+                <div class="row" id="decrypt-row" >
+                    <div class="col-md-12">
+                         <button type="button" class="btn btn-default " id="de_aes" onclick="decrypt('aes');" >
+                            <span class="glyphicon glyphicon-random"></span> Decrypt with AES
+                        </button>    
+                    
+                    
+                        <button type="button" class="btn btn-default " id="de_3des" onclick="decrypt('3des');" >
+                            <span class="glyphicon glyphicon-random"></span> Decrypt with 3DES
+                        </button>    
+                    
+                    
+                        <button type="button" class="btn btn-default " id="de_rabbit" onclick="decrypt('rabbit');" >
+                            <span class="glyphicon glyphicon-random"></span> Decrypt with RABBIT
+                        </button>
+                        
+                        <button type="button" class="btn btn-default " id="de_rc4" onclick="decrypt('rc4');" >
+                            <span class="glyphicon glyphicon-random"></span> Decrypt with RC4
+                        </button>
+                        <div id="decrypt-output" class=""></div>
+                    </div>
+                </div>
+            </div>
+            
+
+            
         <div class="row">
             <div class="col-md-2">
                 <button type="button" class="btn btn-default btn-lg" onclick="move(encrypt);" >
                      <span class="glyphicon glyphicon-arrow-left"></span> Back
                 </button>    
-        </div>
+            </div>
             <div class="col-md-8"></div>
             <div class="col-md-2"></div>                                
-        </div>
-        
+        </div>       
     </div>
 
 

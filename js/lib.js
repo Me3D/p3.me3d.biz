@@ -7,6 +7,8 @@ var hash_type;
 var encrypted;
 var decrypted;
 var message;
+var algo_chosen;
+
 $(document).ready( function() {
 	$("#intro").delay(800).fadeIn("slow", function (){
 	    });
@@ -169,7 +171,7 @@ function encrypt(algo) {
 	console.log("Salt: " + salt);
 	console.log("Key: " + keybits);
 	
-	if (typeof keybits !== 'undefind' && message.length >=1 ) {    //only run if we have a key and atleast 1 charachter to encrypt
+	if (typeof keybits !== undefined && message.length >=1 ) {    //only run if we have a key and atleast 1 charachter to encrypt
 		switch(algo) {
 			case 'aes':
 				//encrypt the message
@@ -178,10 +180,10 @@ function encrypt(algo) {
 				$('#encrypt-output').removeClass("alert-info").removeClass("alert-warning");
 				$('#encrypt-output').addClass("alert alert-success");
 				$('#encrypt-output').html("<p>Your encrypted message is: " + encrypted.ciphertext.toString()  + "</p>");
-				
+				algo_chosen = 'aes';
 				//decrypt the message
-				decrypted = CryptoJS.AES.decrypt(encrypted, keybits.toString());
-				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
+				//decrypted = CryptoJS.AES.decrypt(encrypted, keybits.toString());
+				//console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
 				break;
 			case '3des':
 				encrypted = CryptoJS.TripleDES.encrypt(message, keybits.toString());
@@ -189,9 +191,9 @@ function encrypt(algo) {
 				$('#encrypt-output').removeClass("alert-info").removeClass("alert-warning");
 				$('#encrypt-output').addClass("alert alert-success");
 				$('#encrypt-output').html("<p>Your encrypted message is: " + encrypted.ciphertext.toString()  + "</p>");
-				
-				decrypted = CryptoJS.TripleDES.decrypt(encrypted, keybits.toString());
-				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
+				algo_chosen = '3des';
+				//decrypted = CryptoJS.TripleDES.decrypt(encrypted, keybits.toString());
+				//console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
 				break;
 			
 			case 'rabbit':
@@ -200,9 +202,9 @@ function encrypt(algo) {
 				$('#encrypt-output').removeClass("alert-info").removeClass("alert-warning");
 				$('#encrypt-output').addClass("alert alert-success");
 				$('#encrypt-output').html("<p>Your encrypted message is: " + encrypted.ciphertext.toString()  + "</p>");
-				
-				decrypted = CryptoJS.Rabbit.decrypt(encrypted, keybits.toString());
-				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
+				algo_chosen = 'rabbit';
+				//decrypted = CryptoJS.Rabbit.decrypt(encrypted, keybits.toString());
+				//console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
 				break;
 			
 			case 'rc4':
@@ -211,22 +213,53 @@ function encrypt(algo) {
 				$('#encrypt-output').removeClass("alert-info").removeClass("alert-warning");
 				$('#encrypt-output').addClass("alert alert-success");
 				$('#encrypt-output').html("<p>Your encrypted message is: " + encrypted.ciphertext.toString()  + "</p>");
-				
+				algo_chosen = 'rc4';
+				//decrypted = CryptoJS.RC4Drop.decrypt(encrypted, keybits.toString(), { drop: 3072/4 });
+				//console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
+				break;
+		}	
+	}
+}//end encrypt
+
+function decrypt(algo) {
+	
+	password = $("#password-encrypt").val();
+	message = $("#secret-message").val();
+
+	
+	console.log("Password: " + password);
+	console.log("Password hash: " + hash);
+	console.log("Message: " + message);
+	console.log("Salt: " + salt);
+	console.log("Key: " + keybits);
+	
+	if (typeof keybits !== undefined && message.length >=1 ) {    //only run if we have a key and atleast 1 charachter to encrypt
+		switch(algo) {
+			case 'aes':
+				decrypted = CryptoJS.AES.decrypt(encrypted, keybits.toString());
+				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
+				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8)).addClass("alert alert-success");
+				break;
+			case '3des':
+				decrypted = CryptoJS.TripleDES.decrypt(encrypted, keybits.toString());
+				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
+				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8)).addClass("alert alert-success");
+				break;
+			
+			case 'rabbit':				
+				decrypted = CryptoJS.Rabbit.decrypt(encrypted, keybits.toString());
+				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
+				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8)).addClass("alert alert-success");
+				break;
+			
+			case 'rc4':
 				decrypted = CryptoJS.RC4Drop.decrypt(encrypted, keybits.toString(), { drop: 3072/4 });
 				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
+				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8)).addClass("alert alert-success");
 				break;
-		}
-		
-
-		
-		
-		
-		
-		
+		}	
 	}
-}//end final
-
-
+}//end decrypt
 
 
 
@@ -270,12 +303,15 @@ function move(next_page){
 	case encrypt:
 	    $("#intro, #hashes, #random, #key, #encrypt, #decrypt").fadeOut("slow", function (){
 	    });
+		encrypted = "";
 		password = "";
 		keybits = "";
 		$("#password.form-control").val(""); //remove prior text entry
 		$("#password-encrypt.form-control").val(""); //remove current text entry
 		$("#password-hash-out").html("").removeClass("alert alert-success");
 		$(".key").html("").removeClass("alert alert-success");
+		$("#encrypt-output").html("").removeClass("alert alertSuccess");
+		
 	    $("#encrypt").delay(800).fadeIn("slow", function (){
 	    });
 	    break;
@@ -283,6 +319,38 @@ function move(next_page){
 	case decrypt:
 	    $("#intro, #hashes, #random, #key, #encrypt, #decrypt").fadeOut("slow", function (){
 	    });
+		$("#key-decrypt").html("").removeClass("alert alert-success alert-info");
+		$("#decrypt-output").html("").removeClass("alert alert-success alert-info");
+		$("#ciphertext-decrypt").html("").removeClass("alert alert-success alert-info");
+		$("#decrypt-row").hide();
+		$("#de_aes").hide();
+		$("#de_3des").hide();
+		$("#de_rabbit").hide();
+		$("#de_rc4").hide();
+
+		if (keybits.toString().length >1 && encrypted.toString().length > 1) {
+			$("#key-decrypt").html("<p>Your key is: " + keybits.toString()  + "</p>").addClass("alert alert-success");
+			$("#ciphertext-decrypt").html("<p>Your ciphertext is: " +encrypted.ciphertext.toString()  + "</p>").addClass("alert alert-success");
+			$("#decrypt-row").show();
+			switch(algo_chosen){
+				case 'aes':
+					$("#de_aes").show();
+					break;
+				case '3des':
+					$("#de_3des").show();
+					break;				
+				case 'rabbit':
+					$("#de_rabbit").show();
+					break;
+				case 'rc4':
+					$("#de_rc4").show();
+					break;
+			} //end switch
+			
+		}else{
+			$("#key-decrypt").html("You have no key or encrypted message! Go back a page and calculate a key and encrypt a message for me. Pretty please. With sprinkles.").addClass("alert alert-info");
+		}
+	   
 	   
 	    $("#decrypt").delay(800).fadeIn("slow", function (){
 	    });
