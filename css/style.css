@@ -1,6 +1,6 @@
 body {
     background: grey;
-    
+    position: relative;
 }
 
 
@@ -8,12 +8,16 @@ body {
     background: Black;
     margin:10px;
     padding: 12px;
-    
-    
 }
 
 .para {
     font-size:30px;
+    color: #F8F8F8;
+    font: Helvetica, Arial, sans-serif
+}
+
+.small-para {
+    font-size:10px;
     color: #F8F8F8;
     font: Helvetica, Arial, sans-serif
 }
@@ -26,19 +30,50 @@ body {
 
 #table_text {
     color: green;
-    
+    margin:10px;
 }
 
 #hash_table {
-    
-    
+ 
 }
 
 .hash_name {
-    
 }
 
 .hash_guts {
     word-break:break-all;
-    
+}
+
+.ui-tooltip {
+
+    background: white;
+    border: 2px solid green;
+ 
+    color: #006;
+    font: 22px "Helvetica Neue", Sans-Serif;
+}
+
+#keygo {
+    margin-top: 10px;
+    word-break:break-all;
+}
+
+#password-hash-out{
+    margin-top:10px;
+    word-break:break-all;
+}
+
+#encrypt-output{
+    margin-top:10px;
+    word-break:break-all;
+}
+
+.noise{
+    margin-top:10px;
+    word-break:break-all;
+}
+
+.key{
+    margin-top:10px;
+    word-break:break-all;
 }
