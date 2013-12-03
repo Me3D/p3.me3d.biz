@@ -238,24 +238,24 @@ function decrypt(algo) {
 			case 'aes':
 				decrypted = CryptoJS.AES.decrypt(encrypted, keybits.toString());
 				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
-				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8)).addClass("alert alert-success");
+				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8).replace(/(<([^>]+)>)/ig,"")).addClass("alert alert-success");
 				break;
 			case '3des':
 				decrypted = CryptoJS.TripleDES.decrypt(encrypted, keybits.toString());
 				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
-				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8)).addClass("alert alert-success");
+				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8).replace(/(<([^>]+)>)/ig,"")).addClass("alert alert-success");
 				break;
 			
 			case 'rabbit':				
 				decrypted = CryptoJS.Rabbit.decrypt(encrypted, keybits.toString());
 				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
-				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8)).addClass("alert alert-success");
+				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8).replace(/(<([^>]+)>)/ig,"")).addClass("alert alert-success");
 				break;
 			
 			case 'rc4':
 				decrypted = CryptoJS.RC4Drop.decrypt(encrypted, keybits.toString(), { drop: 3072/4 });
 				console.log("PlainText:"+decrypted.toString(CryptoJS.enc.Utf8));
-				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8)).addClass("alert alert-success");
+				$("#decrypt-output").html("<p>Your secret message is: "+decrypted.toString(CryptoJS.enc.Utf8).replace(/(<([^>]+)>)/ig,"")).addClass("alert alert-success");
 				break;
 		}	
 	}
