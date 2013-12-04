@@ -3,12 +3,13 @@ var salt; //salt used for key generation and encryption
 var keybits; //final key
 var hash; //hash of password
 var password; //password
-var hash_type;
-var encrypted;
-var decrypted;
-var message;
-var algo_chosen;
+var hash_type; //type of hash
+var encrypted; //output of encryption
+var decrypted; //output of decryption
+var message; //paintext message
+var algo_chosen; //which crypto algorithm chosen
 
+//Startup and fade in first page
 $(document).ready( function() {
 	$("#intro").delay(800).fadeIn("slow", function (){
 	    });
@@ -19,6 +20,8 @@ $(document).ready( function() {
 		}	
 	});
 
+
+//Function to receive hash type and output password hash data
 function getHash(hash_type) {
 	console.log("hash selected: " + hash_type);
 		switch(hash_type) {
@@ -56,7 +59,7 @@ function getHash(hash_type) {
 	
 }
 
-
+//Output live hash of entered text.
 $( "#target" ).keyup(function() {
 	$('#md5 ').html( CryptoJS.MD5( $('#target').val()).toString() );
 	$('#ripemd').html( CryptoJS.RIPEMD160( $('#target').val()).toString() );
@@ -66,15 +69,17 @@ $( "#target" ).keyup(function() {
 	$('#sha3').html( CryptoJS.SHA3( $('#target').val()).toString() );
 });
 
-
+//get the password value from encryption form
 $("#password-encrypt.form-control").keyup(function(){
 	password = $("#password-encrypt.form-control").val();
 });
 
+//get the password value from password hash page
 $("#password.form-control").keyup(function(){
 	password = $("#password.form-control").val();
 });
 
+//output status condition of key generation
 function calculating(keysize){
         $('.key').addClass("alert alert-info").removeClass("alert-warning");
 	
@@ -91,7 +96,7 @@ function calculating(keysize){
 	}//end case
 }//end calculating
 
-
+//Generate keys
 function keygen(keysize) {
 	//get random only
 	if (keysize == 0) {
@@ -106,9 +111,8 @@ function keygen(keysize) {
 					$('.noise').html("Completed! Your random noise is: " + noise);
 			}	
 		});//end ajax	
-	} else {
+	} else {        //do realworld key generation
 			if ( password.length >= 1 ) {
-			//do hardcore key generation
 			var startTime = new Date().getTime();
 			calculating(keysize);
 			$.when($.ajax({
@@ -138,7 +142,7 @@ function keygen(keysize) {
 					
 					var option = $("input:radio[name='optionsRadios']:checked").val();
 					getHash(option);
-					//getHash("ripemd");
+					
 					//Perform key expansion combining a password plus salt..1000 times
 					keybits = CryptoJS.PBKDF2(hash, salt, { keySize: keysize/32, iterations: 1000 });
 					
@@ -152,13 +156,13 @@ function keygen(keysize) {
 			}else{	//you didn't type a password
 				$('.key').html( "Whoa! Timeout! Hey buddy, you gotta type something in the password box!").addClass ("alert alert-warning");
 				
-			} //endinside else
+			} //end inside else
 		
 		}//end outside else
 	
 }//end keygen
 
-
+//encrypt the message with the provided algorithm
 function encrypt(algo) {
 	
 	password = $("#password-encrypt").val();
@@ -221,12 +225,13 @@ function encrypt(algo) {
 	}
 }//end encrypt
 
+
+//decrypt the cipher text with the provided algorithm
 function decrypt(algo) {
 	
 	password = $("#password-encrypt").val();
 	message = $("#secret-message").val();
 
-	
 	console.log("Password: " + password);
 	console.log("Password hash: " + hash);
 	console.log("Message: " + message);
@@ -262,7 +267,7 @@ function decrypt(algo) {
 }//end decrypt
 
 
-
+//Logic for next/back buttons for navigation
 function move(next_page){
     switch (next_page) {
 	    case intro:
